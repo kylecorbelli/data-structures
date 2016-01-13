@@ -5,10 +5,10 @@ var Queue = function() {
   
   var someInstance = {};
   someInstance.counter = 0;
-  someInstance.storage = {}
+  someInstance.storage = {};
 
-  someInstance.pop = queueMethods.pop;
-  someInstance.push = queueMethods.push;
+  someInstance.enqueue = queueMethods.enqueue;
+  someInstance.dequeue = queueMethods.dequeue;
   someInstance.size = queueMethods.size;
 
   return someInstance;
@@ -16,14 +16,22 @@ var Queue = function() {
 };
 
 var queueMethods = {
-  pop: function() {
-
+  enqueue: function(value) {
+    this.counter++;
+    for (var i = this.counter; i > 0; i--) {
+      this.storage[i] = this.storage[i - 1];
+    }
+    this.storage[0] = value;
   },
-  push: function() {
-
+  dequeue: function() {
+    if (this.counter > 0) {
+      this.counter--;
+      var temp = this.storage[this.counter];
+      delete this.storage[this.counter];
+      return temp;
+    }
   },
   size: function() {
-
     return this.counter;
   }
 };
