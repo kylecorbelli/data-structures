@@ -13,15 +13,16 @@ var Stack = function() {
   };
 
   someInstance.pop = function() {
-    stackSize--;
-    var tempVar = storage[stackSize];
-    delete storage[stackSize];
-    return tempVar;
+    if (stackSize > 0) {
+      stackSize--;
+      var tempVar = storage[stackSize];
+      delete storage[stackSize];
+      return tempVar;
+    }
   };
 
   someInstance.size = function() {
-    // return Math.max(stackSize, 0);
-    return (stackSize >= 0) ? stackSize : 0;
+    return stackSize;
   };
 
   return someInstance;
