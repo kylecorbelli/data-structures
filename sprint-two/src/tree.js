@@ -15,6 +15,15 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
+  return (function recurse(passedTree) {
+    if (passedTree.value === target) return true;
+    if (passedTree.children.length > 0) {
+      for (var i = 0; i < passedTree.children.length; i ++) {
+        if (recurse(passedTree.children[i])) return true;
+      }
+    }
+    return false;
+  })(this);
 };
 
 
