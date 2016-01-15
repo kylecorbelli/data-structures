@@ -5,31 +5,46 @@ var BinarySearchTree = function(value) {
   tree.right = null;
 
   tree.insert = function(value) {
-    var valueArr = [];
-    // go through and extract all values recursevly from tree
     (function recurse(node) {
-      valueArr.push(node.value);
-      if (tree.left) recurse(tree.left);
-      if (tree.right) recurse(tree.right);
+      if (value > node.value) {
+        if (node.right) {
+          recurse(node.right);
+        } else {
+          node.right = BinarySearchTree(value);
+        }
+      } else {
+        if (node.left) {
+          recurse(node.left);
+        } else {
+          node.left = BinarySearchTree(value);
+        }
+      }
     })(tree);
-    // sort the tree with the added value
-    valueArr.push(value);
-    valueArr.sort(function(a, b) {
-      return a - b; 
-    });
-    // construct a new binary search tree
-    (function makeNode(arr) {
-      
-      var midpointIndex = Math.floor(arr.length / 2);
-      // console.log(midpointIndex);
-      var newTree = BinarySearchTree(arr[midpointIndex]);
-      var leftArr = arr.slice(0, midpointIndex);
-      if (leftArr.length > 0) newTree.left = makeNode(leftArr);
-      var rightArr = arr.slice(midpointIndex + 1);
-      if (rightArr.length > 0) newTree.right = makeNode(rightArr);
-      console.log(newTree);
-      return newTree;
-    })(valueArr);
+    // var valueArr = [];
+    // // go through and extract all values recursevly from tree
+    // (function recurse(node) {
+    //   valueArr.push(node.value);
+    //   if (node.left) recurse(node.left);
+    //   if (node.right) recurse(node.right);
+    // })(tree);
+    // // sort the tree with the added value
+    // valueArr.push(value);
+    // valueArr.sort(function(a, b) {
+    //   return a - b; 
+    // });
+    // // construct a new binary search tree
+    // var reconstructedTree = (function makeNode(arr) {
+    //   var midpointIndex = Math.floor((arr.length - 1) / 2);
+    //   var newTree = BinarySearchTree(arr[midpointIndex]);
+    //   var leftArr = arr.slice(0, midpointIndex);
+    //   if (leftArr.length > 0) newTree.left = makeNode(leftArr);
+    //   var rightArr = arr.slice(midpointIndex + 1);
+    //   if (rightArr.length > 0) newTree.right = makeNode(rightArr);
+    //   return newTree;
+    // })(valueArr);
+    // tree.value = reconstructedTree.value;
+    // tree.left = reconstructedTree.left;
+    // tree.right = reconstructedTree.right;
   };
 
   tree.contains = function(value) {
