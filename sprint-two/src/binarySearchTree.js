@@ -48,6 +48,16 @@ var BinarySearchTree = function(value) {
   };
 
   tree.contains = function(value) {
+    return (function recurse(node) {
+      if (node.value === value) return true;
+      if (node.left) {
+        if (recurse(node.left) === true) return true;
+      }
+      if (node.right) {
+        return recurse(node.right);
+      }
+      return false;
+    })(tree);
 
   };
 
