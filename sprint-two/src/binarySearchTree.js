@@ -61,8 +61,12 @@ var BinarySearchTree = function(value) {
 
   };
 
-  tree.depthFirstLog = function() {
-
+  tree.depthFirstLog = function(callback) {
+    (function recurse(node) {
+      callback(node.value);
+      if (node.left) recurse(node.left);
+      if (node.right) recurse(node.right);
+    })(tree);
   };
 
   return tree;
