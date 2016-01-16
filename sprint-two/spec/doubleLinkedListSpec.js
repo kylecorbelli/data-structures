@@ -10,6 +10,13 @@ describe('doubledoubleLinkedList', function() {
     expect(doubleLinkedList).to.have.property("tail");
   });
 
+  // it('should be able to add and remove heads and tails', function() {
+  //   expect(doubleLinkedList.addToHead(3).to.equal();
+  //   expect(doubleLinkedList).to.have.property("tail");
+  // });
+
+
+
   it('should have methods named "addToTail", "addToHead", "removeTail" "removeHead", "containsFromTail", and "containsFromHead"', function() {
     expect(doubleLinkedList.addToTail).to.be.a("function");
     expect(doubleLinkedList.addToHead).to.be.a("function");
@@ -42,23 +49,23 @@ describe('doubledoubleLinkedList', function() {
   it("should contain a value that was added", function(){
     doubleLinkedList.addToTail(4);
     doubleLinkedList.addToTail(5);
-    expect(doubleLinkedList.contains(4)).to.equal(true);
-    expect(doubleLinkedList.contains(5)).to.equal(true);
-    expect(doubleLinkedList.contains(6)).to.equal(false);
+    expect(doubleLinkedList.containsFromHead(4)).to.equal(true);
+    expect(doubleLinkedList.containsFromTail(5)).to.equal(true);
+    expect(doubleLinkedList.containsFromHead(6)).to.equal(false);
   });
 
   it('should not contain a value that was removed', function(){
     doubleLinkedList.addToTail(4);
     doubleLinkedList.addToTail(5);
     doubleLinkedList.removeHead();
-    expect(doubleLinkedList.contains(4)).to.equal(false);
+    expect(doubleLinkedList.containsFromTail(4)).to.equal(false);
   });
 
   it('should not contain a value that was removed', function(){
     doubleLinkedList.addToTail(4);
     doubleLinkedList.addToTail(5);
     doubleLinkedList.removeHead();
-    expect(doubleLinkedList.contains(4)).to.equal(false);
+    expect(doubleLinkedList.containsFromHead(4)).to.equal(false);
   });
 
   // add more tests here to test the functionality of doubleLinkedList
