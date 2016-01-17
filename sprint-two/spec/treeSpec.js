@@ -41,4 +41,20 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should execute a callback on every value in a tree using "breadthFirstLog"', function(){
+    var array = [];
+    var func = function(value){ array.push(value); };
+    tree.value = 'a';
+    tree.children[0] = Tree('b');
+    tree.children[1] = Tree('c');
+    tree.children[0].children[0] = Tree('d');
+    tree.children[0].children[1] = Tree('e');
+    tree.children[1].children[0] = Tree('f');
+    tree.children[1].children[1] = Tree('g');
+    tree.children[0].children[1].children[0] = Tree('h');
+
+    tree.breadthFirstLog(func);
+    expect(array).to.eql(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']);
+  });
+
 });
